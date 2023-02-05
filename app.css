@@ -1,0 +1,43 @@
+body {
+    background-color: rgb(59, 56, 61);
+}
+
+.row {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(88, 83, 92, 0);
+    border: 2px solid rgb(88, 83, 92);
+    margin: 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 30px;
+    font-family: "Arial";
+}
+
+.column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    color: aliceblue;
+    font-family: "Arial";
+}
+
+.letterInWord {
+    background-color: rgb(185, 185, 65);
+}
+
+.letterNotInWord {
+    background-color: rgb(46, 43, 48);
+}
+
+.letterCorrect {
+    background-color: rgb(105, 182, 105);
+}
