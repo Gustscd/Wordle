@@ -14,7 +14,23 @@ let letterFound = []
 let corrLetters = 0;
 let won = false;
 
+let wins = get();
+
 const validLetters = 'qwertyuiopasdfghjklzxcvbnm'
+
+title[0].innerHTML += "<h5>total wins: " + wins + "</h5>"
+
+function save() {
+
+    localStorage.setItem('wins', wins);
+}
+
+function get() {
+    let data = localStorage.getItem('wins')
+    if (data) {
+        return data
+    } else return 0
+}
 
 let validWord = function(word) {
     for (let w of allWords) {
@@ -24,11 +40,13 @@ let validWord = function(word) {
     return false
 }
 
+highlight()
+
 window.addEventListener('keyup', e => {
-    
     if (!won) {
         if (validLetters.includes(e.key, 0)) {
             if (currRow != 6) {
+
                 writeKey(e.key)
                 currWord += e.key
             }
@@ -43,6 +61,7 @@ window.addEventListener('keyup', e => {
                     currRow = 1;
                     currColumn++;
                     currWord = ""
+                    highlight()
                 }
             }
         } else if (e.key == "Backspace") {
@@ -50,9 +69,11 @@ window.addEventListener('keyup', e => {
                 let row = columns[currColumn].getElementsByClassName('r' + (currRow - 1))[0]
                 row.innerHTML = ""
                 currRow--;
+                highlight()
                 currWord = currWord.substring(0, currWord.length - 1)
             }
         }
+
     }
 })
 
@@ -63,6 +84,19 @@ function writeKey(key) {
     let row = columns[currColumn].getElementsByClassName('r' + currRow)[0]
     row.innerHTML = "<span>" + key.toUpperCase() + "</span>"
     currRow++
+    highlight()
+}
+
+function highlight() {
+    for (let i = 1; i < 6; i++) {
+        let row = columns[currColumn].getElementsByClassName('r' + i)[0]
+        row.style.padding = '0px';
+
+    }
+    if (currRow <= 5) {
+        let row = columns[currColumn].getElementsByClassName('r' + currRow)[0]
+        row.style.padding = '5px';
+    }
 }
 
 function checkWord() {
@@ -85,11 +119,8 @@ function checkWord() {
     if (corrLetters == 5) won = true
     if (won) {
         title[0].innerHTML += "<h3>You Win</h3>"
-    }
-}
 
-while (currRow<=5)
-{
-    let row = columns[currColumn].getElementsByClassName('r' + currRow)[0]
-    row.style += "padding: 10px;"
+        wins++
+        save()
+    }
 }
