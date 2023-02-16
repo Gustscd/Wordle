@@ -25,6 +25,7 @@ let validWord = function(word) {
 }
 
 window.addEventListener('keyup', e => {
+    
     if (!won) {
         if (validLetters.includes(e.key, 0)) {
             if (currRow != 6) {
@@ -85,4 +86,10 @@ function checkWord() {
     if (won) {
         title[0].innerHTML += "<h3>You Win</h3>"
     }
+}
+
+while (currRow<=5)
+{
+    let row = columns[currColumn].getElementsByClassName('r' + currRow)[0]
+    row.style += "padding: 10px;"
 }
